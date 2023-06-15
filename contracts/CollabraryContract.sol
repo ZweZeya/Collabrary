@@ -2,7 +2,9 @@
 
 pragma solidity ^0.8.0;
 
-contract CollabraryContract {
+import "./AuthContract.sol";
+
+contract CollabraryContract is AuthContract {
 
     enum BookStatus { 
         Available,
