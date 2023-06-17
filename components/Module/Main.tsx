@@ -1,6 +1,6 @@
 "use client";
 import { PropsWithChildren, useContext } from "react";
-import { AuthContext } from "@/context/AuthContext";
+import { AuthContext } from "@/common/context/AuthContext";
 import { useRouter, usePathname } from "next/navigation";
 
 const Main = (props: PropsWithChildren) => {
@@ -11,10 +11,10 @@ const Main = (props: PropsWithChildren) => {
     if (pathname != "/Login" && isWalletConnected == false) router.push("/Login");
 
     return (
-        <main className="bg-black h-screen px-7 py-5 text-white">
+        <main className="bg-blue-50 h-screen px-7 py-5">
             {props.children}
         </main>
     )
 }  
 
-export { Main };
+export default Main;

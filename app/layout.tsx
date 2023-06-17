@@ -1,6 +1,6 @@
 import './globals.css'
 import { Inter, Roboto } from 'next/font/google'
-import { AuthContextProvider } from '@/context/AuthContext'
+import { AuthContextProvider } from '@/common/context/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
 const roboto = Roboto({ weight: ['500'], subsets: ['latin'] })

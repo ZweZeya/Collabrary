@@ -1,12 +1,12 @@
-import Image from "next/image"
+import Logo from "./Logo";
 
 const TopBar = () => {
     return (
-        <div className="flex items-center gap-5 mb-6">
-            <Image src="/../public/open-book.png" alt="logo" width="70" height="70" />
+        <div className="flex items-center gap-2 bg-blue-600 text-sky-50 py-3 px-3">
+            <Logo />
             <p className="text-xl">Collabrary</p>
         </div>
     )
 }
 
-export { TopBar };
+export default TopBar;

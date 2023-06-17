@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import AuthContractJSON from "../build/contracts/AuthContract.json";
+import AuthContractJSON from "../../build/contracts/AuthContract.json";
 const truffleContract = require('@truffle/contract');
 
 

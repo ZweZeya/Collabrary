@@ -1,5 +1,5 @@
 "use client";
-import { checkIfWalletConnected } from "@/utils/auth";
+import { checkIfWalletConnected } from "../utils/auth";
 import { createContext, useState, useEffect, PropsWithChildren, SetStateAction, Dispatch } from "react";
 
 const AuthContext = createContext({

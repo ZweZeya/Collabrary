@@ -1,10 +1,10 @@
 "use client"
 import { useState, useEffect, Fragment } from "react";
 import { NextPage } from "next";
-import { load, checkIfWalletConnected } from "../../utils/auth";
+import { load, checkIfWalletConnected } from "../../common/utils/auth";
 import { useRouter } from "next/navigation";
 import { BsWallet2 } from "react-icons/bs";
-import { Main, TopBar } from "@/components/Module/";
+import Layout from "@/components/Module/Layout";
 
 const LoginPage: NextPage = () => {
     const [isLoading, setLoading] = useState<boolean>(true);
@@ -19,13 +19,12 @@ const LoginPage: NextPage = () => {
 
     const handleLogin = () => {
         load().then(r => {
-            router.push("/");
+            router.refresh();
         });
     }
 
     return (
-        <Main>
-            <TopBar />
+        <Layout>
             {!isLoading && 
             <Fragment>
                 <div className="flex flex-col items-center gap-5 justify-center">
@@ -33,14 +32,14 @@ const LoginPage: NextPage = () => {
                     <div className="rounded-lg bg-slate-200 flex flex-col items-center gap-4 py-3 px-3 absolute top-1/3">
                         <p className="text-black text-4xl font-medium">Login</p>
                         <button 
-                            className="rounded-full bg-sky-500 px-4 py-1 flex items-center gap-2 hover:bg-sky-600"
+                            className="rounded-full bg-sky-500 px-4 py-1 flex items-center gap-2 hover:bg-sky-600 text-white"
                             onClick={handleLogin}
                         ><BsWallet2 /> Connect Wallet</button>
                     </div>
                 </div>
             </Fragment>
             }
-        </Main>
+        </Layout>
     )
 }
 

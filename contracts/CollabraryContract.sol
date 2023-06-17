@@ -16,6 +16,7 @@ contract CollabraryContract is AuthContract {
         string title;
         string author;
         string description;
+        uint genre;
         address lender;
         address borrower;
         BookStatus status;
@@ -46,8 +47,8 @@ contract CollabraryContract is AuthContract {
         _;
     }
 
-    function addBook(string memory _title, string memory _author, string memory _description) public {
-        Book memory newBook = Book(_title, _author, _description, msg.sender, address(0), BookStatus.Available);
+    function addBook(string memory _title, string memory _author, string memory _description, uint _genre) public {
+        Book memory newBook = Book(_title, _author, _description, _genre, msg.sender, address(0), BookStatus.Available);
         books[bookId] = newBook;
         bookId++;
         numberOfBooks++;

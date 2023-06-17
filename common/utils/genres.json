@@ -1,0 +1,34 @@
+[
+    {
+        "id": 0,
+        "name": "Fantasy"
+    },
+    {
+        "id": 1,
+        "name": "Sci-Fi"
+    },
+    {
+        "id": 2,
+        "name": "Romance"
+    },
+    {
+        "id": 3,
+        "name": "Mystery"
+    },
+    {
+        "id": 4,
+        "name": "Action"
+    },
+    {
+        "id": 5,
+        "name": "Comics"
+    },
+    {
+        "id": 6,
+        "name": "Self Help"
+    },
+    {
+        "id": 7,
+        "name": "Biography"
+    }
+]
