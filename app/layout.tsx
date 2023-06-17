@@ -1,8 +1,9 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter, Roboto } from 'next/font/google'
 import { AuthContextProvider } from '@/context/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
+const roboto = Roboto({ weight: ['500'], subsets: ['latin'] })
 
 export const metadata = {
   title: 'Collabrary',
@@ -17,7 +18,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className} suppressHydrationWarning={true}>
+      <body className={roboto.className} suppressHydrationWarning={true}>
           <AuthContextProvider>
             {children}
           </AuthContextProvider>

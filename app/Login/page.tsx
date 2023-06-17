@@ -1,9 +1,10 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { NextPage } from "next";
 import { load, checkIfWalletConnected } from "../../utils/auth";
-import "./page.css";
 import { useRouter } from "next/navigation";
+import { BsWallet2 } from "react-icons/bs";
+import { Main, TopBar } from "@/components/Module/";
 
 const LoginPage: NextPage = () => {
     const [isLoading, setLoading] = useState<boolean>(true);
@@ -23,14 +24,23 @@ const LoginPage: NextPage = () => {
     }
 
     return (
-        <main>
+        <Main>
+            <TopBar />
             {!isLoading && 
-                <div>
-                    <h3>Login</h3>
-                    <button onClick={handleLogin}>Connect</button>
+            <Fragment>
+                <div className="flex flex-col items-center gap-5 justify-center">
+                    <p className="text-6xl font-medium">A Shared Library on the Blockchain</p>
+                    <div className="rounded-lg bg-slate-200 flex flex-col items-center gap-4 py-3 px-3 absolute top-1/3">
+                        <p className="text-black text-4xl font-medium">Login</p>
+                        <button 
+                            className="rounded-full bg-sky-500 px-4 py-1 flex items-center gap-2 hover:bg-sky-600"
+                            onClick={handleLogin}
+                        ><BsWallet2 /> Connect Wallet</button>
+                    </div>
                 </div>
+            </Fragment>
             }
-        </main>
+        </Main>
     )
 }
 

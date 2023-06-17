@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from 'next/image';
-import ModuleLayout from '@/components/Module/ModuleLayout';
+import { Main, TopBar } from '@/components/Module/';
 import { load } from "../utils/auth";
 
 export default function Home() {
@@ -11,8 +11,9 @@ export default function Home() {
   })
   
   return (
-    <ModuleLayout>
+    <Main>
+      <TopBar />
       <h1>Home</h1>
-    </ModuleLayout>
+    </Main>
   )
 }
