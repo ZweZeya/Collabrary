@@ -3,7 +3,7 @@ import { Inter, Roboto } from 'next/font/google'
 import { AuthContextProvider } from '@/common/context/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
-const roboto = Roboto({ weight: ['500'], subsets: ['latin'] })
+const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ['latin'] })
 
 export const metadata = {
   title: 'Collabrary',
