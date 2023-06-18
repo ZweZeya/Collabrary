@@ -1,8 +1,17 @@
-const PageHeader = ({title}: {title: string}) => {
+import { PropsWithChildren } from "react"
+
+interface PageHeaderProps extends PropsWithChildren {
+    title: string
+}
+
+const PageHeader = (props: PageHeaderProps) => {
     return (
-        <p className="text-4xl">
-            {title}
-        </p>
+        <div className="flex items-center gap-5">
+            <p className="text-4xl">
+                {props.title}
+            </p>
+            {props.children}
+        </div>
     )
 }
 

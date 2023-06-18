@@ -1,34 +1,38 @@
 [
     {
         "id": 0,
-        "name": "Fantasy"
+        "name": "All"
     },
     {
         "id": 1,
-        "name": "Sci-Fi"
+        "name": "Fantasy"
     },
     {
         "id": 2,
-        "name": "Romance"
+        "name": "Sci-Fi"
     },
     {
         "id": 3,
-        "name": "Mystery"
+        "name": "Romance"
     },
     {
         "id": 4,
-        "name": "Action"
+        "name": "Mystery"
     },
     {
         "id": 5,
-        "name": "Comics"
+        "name": "Action"
     },
     {
         "id": 6,
-        "name": "Self Help"
+        "name": "Comics"
     },
     {
         "id": 7,
+        "name": "Self Help"
+    },
+    {
+        "id": 8,
         "name": "Biography"
     }
 ]

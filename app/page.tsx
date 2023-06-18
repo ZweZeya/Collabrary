@@ -1,25 +1,24 @@
 "use client";
 import { useState, useEffect } from "react";
 import Layout from "@/components/Module/Layout";
-import Modal, { ModalIcons } from "@/components/Module/Modal";
 import { load } from "../common/utils/auth";
+import PageHeader from "@/components/Module/PageHeader";
+import GenreSelect from "@/components/GenreSelect";
 
 export default function Home() {
-  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+    const [seletedGenre, setSelectedGenre] = useState<number>(0);
 
-  useEffect(() => {
-    load().then(r => console.log(r))
-  }, [])
+    useEffect(() => {
+        load().then(r => {
+            console.log(r)
+        })
+    }, [])
   
-  return (
-    <Layout>
-      <Modal 
-        isOpen={isModalOpen}
-        setOpen={setModalOpen}
-        title="Title"
-        content="This is some garbage content."
-        icon={ModalIcons.Success}
-      />
-    </Layout>
-  )
+    return (
+        <Layout>
+            <PageHeader title="Browse">
+                <GenreSelect value={seletedGenre} setValue={setSelectedGenre} />
+            </PageHeader>
+        </Layout>
+    )
 }
