@@ -1,26 +1,24 @@
 "use client";
 import { Dispatch, Fragment, ReactNode, SetStateAction, useCallback } from "react";
 import { AiOutlineWarning, AiOutlineCheckCircle, AiOutlineExclamationCircle, AiOutlineCloseCircle } from "react-icons/ai";
+import { type ModalProps } from "@/common/utils/propsInterfaces";
 
-interface ModalProps {
-    isOpen: boolean,
-    setOpen: Dispatch<SetStateAction<boolean>>,
-    title: string,
+interface SimpleModalProps extends ModalProps {
+    icon?: SimpleModalIcons,
     content: string,
-    icon?: ModalIcons,
-    onRequestClose?: Function
+    title?: string,
 }
 
-enum ModalIcons {
+enum SimpleModalIcons {
     Warning,
     Success,
     Exclaim,
     Failure
 }
 
-const Modal = (props: ModalProps) => {
+const SimpleModal = (props: SimpleModalProps) => {
 
-    const generateIcon = useCallback((type?: ModalIcons): ReactNode => {
+    const generateIcon = useCallback((type?: SimpleModalIcons): ReactNode => {
         if (type == undefined) return <></>;
         switch(type) {
             case 0:
@@ -61,5 +59,5 @@ const Modal = (props: ModalProps) => {
     )
 }
 
-export { ModalIcons };
-export default Modal;
+export { SimpleModalIcons };
+export default SimpleModal;

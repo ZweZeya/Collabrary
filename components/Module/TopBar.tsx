@@ -1,11 +1,14 @@
 "use client";
+import { useContext, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Logo from "./Logo";
 import { AiOutlineUser } from "react-icons/ai";
+import { UserContext } from "@/common/context/UserContext";
 
 const TopBar = () => {
     const pathname = usePathname();
     const router = useRouter();
+    const { userData } = useContext(UserContext);
 
     const handleLogoClick = () => {
         if (pathname != "/") router.push("/");

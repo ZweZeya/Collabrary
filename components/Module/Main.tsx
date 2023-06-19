@@ -9,7 +9,7 @@ const Main = (props: PropsWithChildren) => {
     const pathname = usePathname();
 
     if (pathname != "/Login" && isWalletConnected == false) router.push("/Login");
-
+    
     return (
         <main className="bg-blue-50 h-screen">
             {props.children}

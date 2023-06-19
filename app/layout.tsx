@@ -1,6 +1,7 @@
 import './globals.css'
 import { Inter, Roboto } from 'next/font/google'
 import { AuthContextProvider } from '@/common/context/AuthContext'
+import { UserContextProvider } from '@/common/context/UserContext'
 
 const inter = Inter({ subsets: ['latin'] })
 const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ['latin'] })
@@ -20,7 +21,9 @@ export default function RootLayout({
         <html lang="en">
         <body className={roboto.className} suppressHydrationWarning={true}>
             <AuthContextProvider>
-                {children}
+                <UserContextProvider>
+                    { children }
+                </UserContextProvider>
             </AuthContextProvider>
         </body>
         </html>
