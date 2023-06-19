@@ -1,3 +1,5 @@
+import { CSSProperties, ChangeEventHandler, MouseEventHandler, PropsWithChildren } from "react";
+
 interface ModalProps {
     isOpen: boolean,
     setOpen: Dispatch<SetStateAction<boolean>>,
@@ -5,4 +7,17 @@ interface ModalProps {
     onRequestClose?: Function
 }
 
-export { ModalProps };
+interface InputProps {
+    value: string,
+    placeHolder?: string,
+    onChange: ChangeEventHandler,
+    name?: string,
+}
+
+interface ButtonProps extends PropsWithChildren {
+    onClick: MouseEventHandler
+    className?: string,
+    style?: CSSProperties,
+}
+
+export { ModalProps, InputProps, ButtonProps };

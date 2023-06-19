@@ -23,7 +23,7 @@ const Notification = (props: NotificationProps) => {
                         {props.children}
                     </div>
                     <div 
-                        className="ml-auto border-l border-l-4 border-black h-full flex items-center justify-center w-9 cursor-pointer"
+                        className="ml-auto border-l border-l-1 border-black h-full flex items-center justify-center w-9 cursor-pointer"
                         onClick={handleCloseNotification}
                     >
                         <AiOutlineClose size={15} />

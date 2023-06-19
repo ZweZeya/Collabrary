@@ -6,7 +6,7 @@ interface PageHeaderProps extends PropsWithChildren {
 
 const PageHeader = (props: PageHeaderProps) => {
     return (
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 mb-4">
             <p className="text-4xl">
                 {props.title}
             </p>
