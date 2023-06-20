@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEvent, useState, useContext, useReducer } from "react";
+import { ChangeEvent, useState, useContext, FormEvent } from "react";
 import Layout from "@/components/Module/Layout";
 import PageHeader from "@/components/Module/PageHeader";
 import { type User } from "@/common/utils/types";
@@ -15,8 +15,9 @@ const RegisterPage = () => {
         lastName: "",
         email: ""
     });
-
+    const [errorMsg, setErrorMsg] = useState<string>();
     const { userData } = useContext(UserContext);
+    const { AuthContract, userAddress } = userData
     const router = useRouter();
 
     if (userData.isRegistered) {
@@ -32,8 +33,35 @@ const RegisterPage = () => {
         });
     };
 
-    const handleRegisterClick = () => {
-        
+    const validateEmail = (email: string): boolean => {
+        const emailRegex = new RegExp("\\w+\\@\w+\\.\\S+");
+        return emailRegex.test(email);
+    };
+
+    const isFormComplete = (data: User): boolean => {
+        for (const field in data) {
+            if (data[field as keyof User] === "") return false
+        }
+        return true;
+    }
+
+    const handleRegisterClick = async (e: FormEvent) => {
+        e.preventDefault();
+        const { 
+            username,
+            firstName,
+            lastName,
+            email
+        } = newUser;
+
+        if (!isFormComplete(newUser)) {
+            setErrorMsg("Please fill in all the required fields.");
+        } else if (!validateEmail(email)) {
+            setErrorMsg("Please provide a valid email address.");
+        } else {
+            // await AuthContract.register(username, firstName, lastName, email, {from: userAddress});
+            // router.push("/");
+        }
     };
 
     return (
@@ -70,6 +98,9 @@ const RegisterPage = () => {
                         placeHolder="@example.com"
                     />
                     <Button onClick={handleRegisterClick} className="bg-sky-50 hover:bg-sky-200">Register</Button>
+                    { errorMsg && 
+                        <p className="text-red-700">{errorMsg}</p>
+                    }
                 </form>
             </div>
         </Layout>

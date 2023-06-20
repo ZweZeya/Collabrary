@@ -2,14 +2,15 @@
 import { load } from "../utils/auth";
 import { createContext, useState, useEffect, PropsWithChildren, SetStateAction, Dispatch } from "react";
 import { usePathname } from "next/navigation";
+import { type UserData } from "../utils/types";
 
 const UserContext = createContext({
-    userData: {} as any,
-    setUserData: (() => {}) as Dispatch<SetStateAction<any>>
+    userData: {} as UserData,
+    setUserData: (() => {}) as Dispatch<SetStateAction<UserData>>
 });
 
 const UserContextProvider = (props: PropsWithChildren) => {
-    const [userData, setUserData] = useState<any>();
+    const [userData, setUserData] = useState<UserData>({} as UserData);
     const [isLoading, setLoading] = useState<boolean>(true);
     const pathname = usePathname();
 

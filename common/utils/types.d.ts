@@ -5,4 +5,11 @@ type User = {
     email: string
 }
 
-export { User };
+type UserData = {
+    AuthContract: any,
+    isRegistered: boolean,
+    userAddress: string,
+    user: any,
+}
+
+export { User, UserData };
