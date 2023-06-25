@@ -15,11 +15,13 @@ const UserContextProvider = (props: PropsWithChildren) => {
     const pathname = usePathname();
 
     useEffect(() => {
-        if (pathname != "Login") {
+        if (pathname != "/Login") {
             load().then(r => {
                 setUserData(r);
                 setLoading(false);
             });
+        } else {
+            setLoading(false);
         }
     }, [pathname]);
 

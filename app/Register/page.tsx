@@ -34,7 +34,8 @@ const RegisterPage = () => {
     };
 
     const validateEmail = (email: string): boolean => {
-        const emailRegex = new RegExp("\\w+\\@\w+\\.\\S+");
+        const emailRegex = new RegExp(/\w+\@\w+\.\S+/, "i");
+        console.log(emailRegex.test(email))
         return emailRegex.test(email);
     };
 
@@ -59,8 +60,8 @@ const RegisterPage = () => {
         } else if (!validateEmail(email)) {
             setErrorMsg("Please provide a valid email address.");
         } else {
-            // await AuthContract.register(username, firstName, lastName, email, {from: userAddress});
-            // router.push("/");
+            await AuthContract.register(username, firstName, lastName, email, {from: userAddress});
+            router.push("/");
         }
     };
 
