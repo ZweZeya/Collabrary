@@ -12,4 +12,11 @@ type UserData = {
     user: any,
 }
 
-export { User, UserData };
+type Book = {
+    title: string,
+    author: string,
+    description: string,
+    genreId: number,
+}
+
+export { User, UserData, Book };
