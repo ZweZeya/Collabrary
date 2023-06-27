@@ -1,5 +1,5 @@
 "use client";
-import { useState, useContext, Fragment } from "react";
+import { useState, useContext, Fragment, ChangeEvent } from "react";
 import { UserContext } from "@/common/context/UserContext";
 import Layout from "@/components/Module/Layout";
 import PageHeader from "@/components/Module/PageHeader";
@@ -12,11 +12,15 @@ export default function Home() {
     const { userData } = useContext(UserContext)
     const [isRegisterPromptOpen, setRegisterPromptOpen] = useState<boolean>(!userData.isRegistered);
 
+    const handleGenreChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        setSelectedGenre(+e.target.value);
+    }
+
     return (
         <Fragment>
             <Layout>
                 <PageHeader title="Browse">
-                    <GenreSelect value={seletedGenre} setValue={setSelectedGenre} />
+                    <GenreSelect value={seletedGenre} onChange={handleGenreChange} allOption />
                 </PageHeader>
             </Layout>
 
@@ -30,5 +34,5 @@ export default function Home() {
                 </p>
             </Notification>
     </Fragment>
-    )
-}
+    );
+};

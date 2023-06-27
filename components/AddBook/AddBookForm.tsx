@@ -2,7 +2,6 @@
 import { FormEvent, ChangeEvent, useState } from "react";
 import TextInput from "../TextInput";
 import { Book } from "@/common/utils/types";
-import genres from "../../common/utils/genres.json";
 import GenreSelect from "../GenreSelect";
 import Button from "../Button";
 
@@ -20,16 +19,16 @@ const AddBookForm = () => {
                 ...prev,
                 [e.target.name]: e.target.value
             }
-        })
+        });
     };
 
     const handleAddBook = (e: FormEvent) => {
         e.preventDefault();
-    }
+    };
 
     return (
-        <div>
-            <form>
+        <div className="flex justify-center">
+            <form className="flex flex-col gap-3 bg-indigo-100 items-center px-3 py-3 rounded-md">
                 <TextInput 
                     name="title"
                     value={newBook.title}
@@ -48,6 +47,15 @@ const AddBookForm = () => {
                     onChange={handleInputChange}
                     label="Description"
                 />
+                <div className="flex flex-col">
+                    <label className="font-medium">Genre</label>
+                    <GenreSelect 
+                        value={newBook.genreId}
+                        onChange={handleInputChange}
+                        name="genreId"
+                        className="h-8 w-80"
+                    />
+                </div>
                 <Button
                     onClick={handleAddBook}
                 >Add</Button>

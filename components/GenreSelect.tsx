@@ -1,18 +1,19 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, ChangeEventHandler, Dispatch, SetStateAction } from "react";
 import genres from "../common/utils/genres.json";
 
 interface SelectProps {
     value: number,
-    setValue: Dispatch<SetStateAction<number>>,
+    onChange: ChangeEventHandler,
+    allOption?: boolean,
+    name?: string,
+    className?: string
 }
 
 const GenreSelect = (props: SelectProps) => { 
 
-    const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        props.setValue(+e.target.value);
-    }
+    const genreList = props.allOption ? genres : genres.filter(g => g.id != 0);
 
-    const genreOptions = (genres as {id: number, name: string}[]).map(genre => {
+    const genreOptions = genreList.map(genre => {
         return (
             <option key={genre.id} value={genre.id}>{genre.name}</option>
         )
@@ -21,9 +22,13 @@ const GenreSelect = (props: SelectProps) => {
     return (
         <select 
             value={props.value} 
-            onChange={handleSelectChange}
-            className="bg-sky-50 border border-neutral-950 rounded"
+            onChange={props.onChange}
+            name={props.name}
+            className={`${props.className} bg-sky-50 border border-neutral-950 rounded`}
         >
+            {!props.allOption &&
+                <option hidden>Select Genre</option>
+            }
             { genreOptions }
         </select>
     )

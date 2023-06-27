@@ -5,8 +5,7 @@ import AddBookForm from "@/components/AddBook/AddBookForm"
 const AddBookPage = () => {
     return (
         <Layout>
-            <PageHeader title="Add Book">
-            </PageHeader>
+            <PageHeader title="Add Book"></PageHeader>
             <AddBookForm />
         </Layout>
     )
