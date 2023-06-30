@@ -23,7 +23,7 @@ contract CollabraryContract is AuthContract {
     }
 
     uint public numberOfBooks;
-    uint bookId;
+    uint public bookId;
     mapping (uint => Book) public books;
 
     constructor() {

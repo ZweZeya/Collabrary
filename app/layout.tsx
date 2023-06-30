@@ -9,7 +9,7 @@ const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ['latin'] })
 
 export const metadata = {
     title: 'Collabrary',
-    description: 'Blockchain Library',
+    description: 'Blockchain Library'
 }
 
 export default function RootLayout({
@@ -20,6 +20,9 @@ export default function RootLayout({
 
     return (
         <html lang="en">
+        <head>
+            <link rel="icon" href="/favicon.ico" sizes="any" />
+        </head>
         <body className={roboto.className} suppressHydrationWarning={true}>
             <AuthContextProvider>
                 <UserContextProvider>

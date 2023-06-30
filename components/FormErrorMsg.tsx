@@ -1,5 +1,5 @@
 import { Fragment, PropsWithChildren } from "react";
-import { ModalProps } from "@/common/utils/propsInterfaces";
+import { type ModalProps } from "@/common/utils/propsInterfaces";
 
 interface FormErrorMsgProps extends ModalProps, PropsWithChildren {};
 

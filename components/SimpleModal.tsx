@@ -1,5 +1,5 @@
 "use client";
-import { Dispatch, Fragment, ReactNode, SetStateAction, useCallback } from "react";
+import { Fragment, ReactNode, useCallback } from "react";
 import { AiOutlineWarning, AiOutlineCheckCircle, AiOutlineExclamationCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import { type ModalProps } from "@/common/utils/propsInterfaces";
 
