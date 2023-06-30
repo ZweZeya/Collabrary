@@ -2,6 +2,7 @@ import './globals.css'
 import { Inter, Roboto } from 'next/font/google'
 import { AuthContextProvider } from '@/common/context/AuthContext'
 import { UserContextProvider } from '@/common/context/UserContext'
+import { CollabraryContextProvider } from '@/common/context/CollabraryContext'
 
 const inter = Inter({ subsets: ['latin'] })
 const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ['latin'] })
@@ -22,7 +23,9 @@ export default function RootLayout({
         <body className={roboto.className} suppressHydrationWarning={true}>
             <AuthContextProvider>
                 <UserContextProvider>
-                    { children }
+                    <CollabraryContextProvider>
+                        { children }
+                    </CollabraryContextProvider>
                 </UserContextProvider>
             </AuthContextProvider>
         </body>
