@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState, useCallback } from "react";
 import { CollabraryContext } from "@/common/context/CollabraryContext";
 import { type Book } from "@/common/utils/types";
+import LibraryGrid from "./LibraryGrid";
 
 const Library = () => {
     const { collabraryContract } = useContext(CollabraryContext);
@@ -28,7 +29,7 @@ const Library = () => {
     
     return (
         <div>
-
+            <LibraryGrid books={books} />
         </div>
     );
 };

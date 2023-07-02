@@ -6,7 +6,7 @@ import PageHeader from "@/components/Module/PageHeader";
 import GenreSelect from "@/components/GenreSelect";
 import Notification from "../components/Notification";
 import Link from "next/link";
-import Library from "@/components/Library";
+import Library from "@/components/Library/Library";
 
 export default function Home() {
     const [seletedGenre, setSelectedGenre] = useState<number>(0);
@@ -23,8 +23,8 @@ export default function Home() {
                 <PageHeader title="Browse">
                     <GenreSelect value={seletedGenre} onChange={handleGenreChange} allOption />
                 </PageHeader>
+                <Library />
             </Layout>
-            <Library />
             <Notification
                 isOpen={isRegisterPromptOpen}
                 setOpen={setRegisterPromptOpen}
