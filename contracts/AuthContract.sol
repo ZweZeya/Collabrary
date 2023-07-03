@@ -2,28 +2,19 @@
 
 pragma solidity ^0.8.0;
 
-contract AuthContract {
+import "./Types.sol";
 
-    struct User {
-        address userAddress;
-        string username;
-        string firstName;
-        string lastName;
-        string email;
-    }
+contract AuthContract {
 
     mapping(address => User) public users;
     mapping(string => bool) private _isUsernameTaken;
 
     event newUserRegistered(address indexed _address);
+    event userDeleted(address indexed _address);
 
-    modifier validUser() {
-        require(users[msg.sender].userAddress != address(0), "You are not a registered user.");
+    modifier onlyRegisteredUsers() {
+        require(users[msg.sender].isRegistered == true, "You are not a registered user.");
         _;
-    }
-
-    function isUserRegistered() public view returns(bool) {
-        return users[msg.sender].userAddress != address(0);
     }
  
     function register(
@@ -32,11 +23,20 @@ contract AuthContract {
         string memory _lastName,
         string memory _email
     ) public {
-        require(users[msg.sender].userAddress == address(0), "You are already a registered user.");
+        require(users[msg.sender].isRegistered == false, "You are already a registered user.");
         require(_isUsernameTaken[_username] == false, "Username is already taken.");
-        User memory newUser = User(msg.sender, _username, _firstName, _lastName, _email);
+        
+        uint[] memory ownedBookIds = new uint[](100);
+        uint[] memory loanedBookIds = new uint[](100);
+        User memory newUser = User(msg.sender, _username, _firstName, _lastName, _email, true, ownedBookIds, loanedBookIds);
         users[msg.sender] = newUser;
         emit newUserRegistered(msg.sender);
+    }
+
+    function deleteUser() public onlyRegisteredUsers {
+        users[msg.sender].isRegistered = false;
+        _isUsernameTaken[users[msg.sender].username] = false;
+        emit userDeleted(msg.sender);
     }
 
 }
