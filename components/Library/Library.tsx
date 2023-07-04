@@ -20,7 +20,7 @@ const Library = ({genre}: {genre: number}) => {
             list.push({
                 title: book[0],
                 author: book[1],
-                genreId: book[2].words[0],
+                genreId: book[2].words[0]
             } as Book)
         }
         return list;
@@ -35,7 +35,7 @@ const Library = ({genre}: {genre: number}) => {
             list.push({
                 title: book[0],
                 author: book[1],
-                genreId: book[2].words[0],
+                genreId: book[2].words[0]
             } as Book)
         }
         return list;

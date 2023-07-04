@@ -17,7 +17,7 @@ export default function Home() {
     const handleGenreChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setSelectedGenre(+e.target.value);
     }
-
+    
     return (
         <Layout>
             <PageHeader title="Browse">

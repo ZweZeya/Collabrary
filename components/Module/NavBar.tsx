@@ -3,16 +3,22 @@ import { UserContext } from "@/common/context/UserContext";
 import ProfileDropdown from "../ProfileDropdown";
 import { AiOutlineUser, AiOutlineSetting } from "react-icons/ai";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const NavBar = () => {
     const [isProfileDropdownOpen, setProfileDropdownOpen] = useState<boolean>(false);
     const { userData } = useContext(UserContext);
     const { user } = userData;
+    const router = useRouter();
 
     const handleProfileDropdown = (state: boolean) => {
         if (user.isRegistered) {
             setProfileDropdownOpen(state);
         }
+    };
+
+    const handleProfileClick = () => {
+        router.push("/Profile");
     };
 
     return (
@@ -32,6 +38,7 @@ const NavBar = () => {
                     size={30} 
                     onMouseEnter={() => handleProfileDropdown(true)}
                     onMouseLeave={() => handleProfileDropdown(false)} 
+                    onClick={handleProfileClick}
                 />
             </div>
             {/* <ProfileDropdown 
