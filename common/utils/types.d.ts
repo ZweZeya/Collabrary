@@ -12,10 +12,18 @@ type UserData = {
     user: any,
 }
 
+enum BookStatus { 
+    Available,
+    Borrowed,
+    LoanPending,
+    ReturnPending
+}
+
 type Book = {
     title: string,
     author: string,
     genreId: number,
+    status: BookStatus
 }
 
-export { User, UserData, Book };
+export { User, UserData, Book, BookStatus };
