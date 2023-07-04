@@ -3,11 +3,11 @@ type User = {
     firstName: string,
     lastName: string,
     email: string
+    // isRegistered?: boolean,
 }
 
 type UserData = {
     AuthContract: any,
-    isRegistered: boolean,
     userAddress: string,
     user: any,
 }

@@ -33,13 +33,8 @@ const loadContract = async () => {
     contract.setProvider(window.web3.currentProvider);
     const userAddress = (await window.ethereum.request({method: 'eth_accounts'}))[0];
     const AuthContract =  await contract.deployed();
-    const isRegistered = await checkIfUserRegistered(AuthContract, userAddress);
     const user = await loadUser(AuthContract, userAddress);
-    return { AuthContract, userAddress, isRegistered, user };
-}
-
-const checkIfUserRegistered = async (contract, address) => {
-    return await contract.isUserRegistered({from: address});
+    return { AuthContract, userAddress, user };
 }
 
 const loadUser = async (contract, address) => {

@@ -12,7 +12,7 @@ const Notification = (props: NotificationProps) => {
             props.onRequestClose();
         }
     }
-
+    console.log(props.isOpen)
     return (
         <Fragment>
             {props.isOpen &&

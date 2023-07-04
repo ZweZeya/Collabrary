@@ -17,10 +17,10 @@ const RegisterPage = () => {
     });
     const [errorMsg, setErrorMsg] = useState<string>();
     const { userData } = useContext(UserContext);
-    const { AuthContract, userAddress } = userData
+    const { AuthContract, userAddress, user } = userData
     const router = useRouter();
 
-    if (userData.isRegistered) {
+    if (user.isRegistered) {
         router.push("/");
     }
 

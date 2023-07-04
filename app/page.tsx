@@ -11,20 +11,19 @@ import Library from "@/components/Library/Library";
 export default function Home() {
     const [seletedGenre, setSelectedGenre] = useState<number>(0);
     const { userData } = useContext(UserContext)
-    const [isRegisterPromptOpen, setRegisterPromptOpen] = useState<boolean>(!userData.isRegistered);
+    const { user } = userData
+    const [isRegisterPromptOpen, setRegisterPromptOpen] = useState<boolean>(!user.isRegistered);
 
     const handleGenreChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setSelectedGenre(+e.target.value);
     }
 
     return (
-        <Fragment>
-            <Layout>
-                <PageHeader title="Browse">
-                    <GenreSelect value={seletedGenre} onChange={handleGenreChange} allOption />
-                </PageHeader>
-                <Library />
-            </Layout>
+        <Layout>
+            <PageHeader title="Browse">
+                <GenreSelect value={seletedGenre} onChange={handleGenreChange} allOption />
+            </PageHeader>
+            <Library />
             <Notification
                 isOpen={isRegisterPromptOpen}
                 setOpen={setRegisterPromptOpen}
@@ -34,6 +33,6 @@ export default function Home() {
                     <Link href="/Register" className="underline">Register</Link>
                 </p>
             </Notification>
-    </Fragment>
+        </Layout>
     );
 };
