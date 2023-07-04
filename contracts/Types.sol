@@ -12,11 +12,11 @@ enum BookStatus {
 struct Book {
     string title;
     string author;
-    string description;
     uint genre;
     address bookOwner;
     address bookLoaner;
     BookStatus status;
+    uint idIndex;
     uint ownerIndex;
     uint loanerIndex;
     uint genreIndex;

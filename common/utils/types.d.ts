@@ -15,7 +15,6 @@ type UserData = {
 type Book = {
     title: string,
     author: string,
-    description: string,
     genreId: number,
 }
 

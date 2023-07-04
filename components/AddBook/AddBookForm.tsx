@@ -13,7 +13,6 @@ const AddBookForm = () => {
     const [newBook, setNewBook] = useState<Book>({
         title: "",
         author: "",
-        description: "",
         genreId: -1
     })
     const [isSuccessModalOpen, setSuccessModalOpen] = useState<boolean>(false);
@@ -46,13 +45,12 @@ const AddBookForm = () => {
         return (
             book.title != "" &&
             book.author != "" &&
-            book.description != "" &&
             book.genreId != -1
         );
     };
 
     const addBook = async (book: Book) => {
-        await collabraryContract.addBook(book.title, book.author, book.description, book.genreId, {from: userAddress});
+        await collabraryContract.addBook(book.title, book.author, book.genreId, {from: userAddress});
     };
 
     return (
@@ -70,12 +68,6 @@ const AddBookForm = () => {
                         value={newBook.author}
                         onChange={handleInputChange}
                         label="Author"
-                    />
-                    <TextInput 
-                        name="description"
-                        value={newBook.description}
-                        onChange={handleInputChange}
-                        label="Description"
                     />
                     <div className="flex flex-col">
                         <label className="font-medium">Genre</label>

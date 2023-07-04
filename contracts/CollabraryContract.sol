@@ -6,14 +6,13 @@ import "./AuthContract.sol";
 
 contract CollabraryContract is AuthContract {
 
-    uint public numberOfBooks;
-    uint public bookId;
+    uint private bookId;
     uint8 public constant BOOK_LOAN_LIMIT = 4;
+    uint[] public bookIds;
     mapping (uint => Book) public books;
     mapping (uint => uint[]) public booksByGenre;
 
     constructor() {
-        numberOfBooks = 0;
         bookId = 0;
     }
 
@@ -55,30 +54,36 @@ contract CollabraryContract is AuthContract {
         _;
     }
 
-    function addBook(string memory _title, string memory _author, string memory _description, uint _genre) public {
-        uint ownerIndex = users[msg.sender].ownedBookIds.length;
-        uint genreIndex = booksByGenre[_genre].length;
+    function getBookCount() public view returns(uint) {
+        return bookIds.length;
+    }
 
-        Book memory newBook = Book(
-            _title, 
+    function createNewBook(string memory _title, string memory _author, uint _genre) private view returns(Book memory) {
+        return Book(
+            _title,
             _author, 
-            _description, 
             _genre, 
             msg.sender, 
             address(0), 
             BookStatus.Available,
-            ownerIndex,
+            bookIds.length,
+            users[msg.sender].ownedBookIds.length,
             0,
-            genreIndex
+            booksByGenre[_genre].length
         ); 
+    }
+
+    function addBook(string memory _title, string memory _author, uint _genre) public {
+
+        Book memory newBook = createNewBook(_title, _author, _genre);
         books[bookId] = newBook;
 
         // Insert the book id into owner and genre arrays
+        bookIds.push(bookId);
         users[msg.sender].ownedBookIds.push(bookId);
         booksByGenre[_genre].push(bookId);
 
         bookId++;
-        numberOfBooks++;
 
         emit BookAdded(newBook);
     }
@@ -86,6 +91,13 @@ contract CollabraryContract is AuthContract {
     function removeBook(uint _bookId) public onlyBookOwner(_bookId) onlyBooksInInventory(_bookId) {
         
         Book memory _bookToBeRemoved = books[_bookId];
+
+        // Swap the last index with the index to be removed
+        uint idIndex = _bookToBeRemoved.idIndex;
+        uint lastBookId = bookIds[bookIds.length-1];
+        bookIds[idIndex] = lastBookId;
+        bookIds.pop();
+        books[lastBookId].idIndex = idIndex;
 
         // Swap the last index with the index to be removed
         uint ownerIndex = _bookToBeRemoved.ownerIndex;
@@ -102,7 +114,6 @@ contract CollabraryContract is AuthContract {
         books[lastBookIdOfGenre].genreIndex = genreIndex;
 
         delete books[_bookId];
-        numberOfBooks--;
 
         emit BookRemoved(_bookToBeRemoved);
     }

@@ -7,9 +7,10 @@ import Link from "next/link";
 const NavBar = () => {
     const [isProfileDropdownOpen, setProfileDropdownOpen] = useState<boolean>(false);
     const { userData } = useContext(UserContext);
+    const { user } = userData;
 
     const handleProfileDropdown = (state: boolean) => {
-        if (userData.isRegistered) {
+        if (user.isRegistered) {
             setProfileDropdownOpen(state);
         }
     };
@@ -17,9 +18,11 @@ const NavBar = () => {
     return (
         <Fragment>
             <div className="ml-auto flex items-center gap-5">
-                <div className="flex items-center">
-                    <NavBarLink text="Add" href="/Add" />
-                </div>
+                {user.isRegistered &&
+                    <div className="flex items-center">
+                        <NavBarLink text="Add" href="/Add" />
+                    </div>
+                }
                 <AiOutlineSetting 
                     className="cursor-pointer" 
                     size={30} 
