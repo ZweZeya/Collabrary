@@ -58,6 +58,10 @@ contract CollabraryContract is AuthContract {
         return bookIds.length;
     }
 
+    function getBookCountByGenre(uint _genre) public view returns(uint) {
+        return booksByGenre[_genre].length;
+    }
+
     function createNewBook(string memory _title, string memory _author, uint _genre) private view returns(Book memory) {
         return Book(
             _title,

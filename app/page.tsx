@@ -23,7 +23,7 @@ export default function Home() {
             <PageHeader title="Browse">
                 <GenreSelect value={seletedGenre} onChange={handleGenreChange} allOption />
             </PageHeader>
-            <Library />
+            <Library genre={seletedGenre} />
             <Notification
                 isOpen={isRegisterPromptOpen}
                 setOpen={setRegisterPromptOpen}
