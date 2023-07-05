@@ -1,7 +1,14 @@
+"use client";
+import { useRouter } from "next/navigation";
 import { type Book } from "@/common/utils/types";
 
 const BookElement = ({book}: {book: Book}) => {
     const { bg, text } = getBookColor(book);
+    const router = useRouter();
+
+    const handleBookClick = () => {
+        router.push(`/Book/${book.id}`);
+    };
 
     return (
         <div className="px-2 py-2 flex flex-col items-center">
@@ -11,6 +18,7 @@ const BookElement = ({book}: {book: Book}) => {
                     backgroundColor: bg, 
                     color: text
                 }}
+                onClick={handleBookClick}
             >
                 <p>{ book.title }</p>
                 <p className="mt-auto text-sm">{ book.author }</p>

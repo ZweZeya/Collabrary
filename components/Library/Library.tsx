@@ -18,6 +18,7 @@ const Library = ({genre}: {genre: number}) => {
             const bookId = (await collabraryContract.bookIds(i)).words[0];
             const book = await collabraryContract.books(bookId);
             list.push({
+                id: bookId,
                 title: book.title,
                 author: book.author,
                 genreId: book.genre.words[0],
@@ -33,6 +34,7 @@ const Library = ({genre}: {genre: number}) => {
             const bookId = (await collabraryContract.booksByGenre(genre, i)).words[0];
             const book = await collabraryContract.books(bookId);
             list.push({
+                id: bookId,
                 title: book.title,
                 author: book.author,
                 genreId: book.genre.words[0],

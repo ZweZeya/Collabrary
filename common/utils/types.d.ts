@@ -20,6 +20,7 @@ enum BookStatus {
 }
 
 type Book = {
+    id: number,
     title: string,
     author: string,
     genreId: number,

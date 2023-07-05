@@ -21,6 +21,7 @@ const UserDetails = () => {
             const bookId = (await collabraryContract.getOwnedBookIdByIndex(i, {from: userAddress})).words[0];
             const book = await collabraryContract.books(bookId);
             list.push({
+                id: bookId,
                 title: book.title,
                 author: book.author,
                 genreId: book.genre.words[0],
@@ -37,6 +38,7 @@ const UserDetails = () => {
             const bookId = (await collabraryContract.getLoanedBookIdByIndex(i, {from: userAddress})).words[0];
             const book = await collabraryContract.books(bookId);
             list.push({
+                id: bookId,
                 title: book.title,
                 author: book.author,
                 genreId: book.genre.words[0],
