@@ -2,6 +2,10 @@
 import { usePathname, useRouter } from "next/navigation";
 import Logo from "./Logo";
 import NavBar from "./NavBar";
+import { Charm } from "next/font/google";
+
+const charm = Charm({weight: "700", subsets: ['latin']});
+
 
 const TopBar = () => {
     const pathname = usePathname();
@@ -18,7 +22,7 @@ const TopBar = () => {
                 onClick={handleLogoClick}
             >
                 <Logo />
-                <p className="text-xl">Collabrary</p>
+                <p className={"text-2xl " + charm.className}>Collabrary</p>
             </div>
             {pathname != "/Login" && 
                 <NavBar />
