@@ -1,3 +1,5 @@
+import { BookStatus } from "./enum";
+
 type User = {
     username: string,
     firstName: string,
@@ -12,19 +14,13 @@ type UserData = {
     user: any,
 }
 
-enum BookStatus { 
-    Available,
-    Borrowed,
-    LoanPending,
-    ReturnPending
-}
-
 type Book = {
     id: number,
     title: string,
     author: string,
     genreId: number,
-    status: BookStatus
+    status: BookStatus,
+    bookOwner: string
 }
 
-export { User, UserData, Book, BookStatus };
+export { User, UserData, Book };
