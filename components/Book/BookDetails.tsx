@@ -1,34 +1,44 @@
 import { type Book } from "@/common/utils/types";
 import { BookStatus } from "@/common/utils/enum";
 import genres from "@/common/utils/genres.json";
+import BookElement from "./BookElement";
+import { PropsWithChildren } from "react";
+import BookStatusElement from "./BookStatusElement";
 
 const BookDetails = ({book}: {book: Book}) => {
 
     return (
-        <table>
-            <tbody className="text-left">
-                <tr>
-                    <th>Title</th>
-                    <td>{book.title}</td>
-                </tr>
-                <tr>
-                    <th>Author</th>
-                    <td>{book.author}</td>
-                </tr>
-                <tr>
-                    <th>Genre</th>
-                    <td>{genres[book.genreId].name}</td>
-                </tr>
-                <tr>
-                    <th>Status</th>
-                    <td>{BookStatus[book.status]}</td>
-                </tr>
-                <tr>
-                    <th>Owner</th>
-                    <td>{book.bookOwner}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div className="flex gap-x-8">
+            <div className="grid grid-cols-2 items-center gap-x-4">
+                <H>Title</H>
+                <C>{book.title}</C>
+                <H>Author</H>
+                <C>{book.author}</C>
+                <H>Genre</H>
+                <C>{genres[book.genreId].name}</C>
+                <H>Status</H>
+                <C><BookStatusElement status={book.status} /></C>
+                <H>Owner</H>
+                <C>{book.bookOwner}</C>
+            </div>
+            {/* <BookElement book={book} /> */}
+        </div>
+    );
+};
+
+const H = (props: PropsWithChildren) => {
+    return (
+        <p className="text-lg font-medium">
+            { props.children }:
+        </p>
+    );
+};
+
+const C = (props: PropsWithChildren) => {
+    return (
+        <p className="">
+            { props.children }
+        </p>
     );
 };
 

@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { type Book } from "@/common/utils/types";
+import { type ColorScheme } from "@/common/utils/propsInterfaces";
 
 const BookElement = ({book}: {book: Book}) => {
     const { bg, text } = getBookColor(book);
@@ -27,7 +28,7 @@ const BookElement = ({book}: {book: Book}) => {
     );
 };
 
-const getBookColor = (book: Book): {bg: string, text: string} => {
+const getBookColor = (book: Book): ColorScheme => {
     switch (book.genreId) {
         case 1:
             return {bg: "#FC4F00", text: "#FFFFFF"};

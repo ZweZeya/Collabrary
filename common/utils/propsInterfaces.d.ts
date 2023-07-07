@@ -20,4 +20,9 @@ interface ButtonProps extends PropsWithChildren {
     style?: CSSProperties,
 }
 
-export { ModalProps, InputProps, ButtonProps };
+interface ColorScheme {
+    bg: string,
+    text: string
+}
+
+export { ModalProps, InputProps, ButtonProps, ColorScheme };

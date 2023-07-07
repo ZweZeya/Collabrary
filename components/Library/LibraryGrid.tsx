@@ -1,6 +1,6 @@
 import { type Book } from "@/common/utils/types";
 import { ReactNode } from "react";
-import BookElement from "./BookElement";
+import BookElement from "../Book/BookElement";
 
 const LibraryGrid = ({books}: {books: Book[]}) => {
 
