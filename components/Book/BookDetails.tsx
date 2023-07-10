@@ -17,9 +17,16 @@ const BookDetails = ({book}: {book: Book}) => {
                 <H>Genre</H>
                 <C>{genres[book.genreId].name}</C>
                 <H>Status</H>
-                <C><BookStatusElement status={book.status} /></C>
+                {/* <C><BookStatusElement status={book.status} /></C> */}
+                <C>{book.status}</C>
                 <H>Owner</H>
                 <C>{book.bookOwner}</C>
+                {book.status == BookStatus.Borrowed &&
+                    <>
+                        <H>Loaner</H>
+                        <C>{book.bookLoaner}</C>
+                    </>
+                }
             </div>
             {/* <BookElement book={book} /> */}
         </div>

@@ -23,7 +23,6 @@ struct Book {
 }
 
 struct User {
-    address userAddress;
     string username;
     string firstName;
     string lastName;

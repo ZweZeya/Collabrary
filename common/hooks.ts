@@ -11,7 +11,9 @@ const useBook = (bookId: number) => {
 
     const fetchBook = useCallback(async (): Promise<Book> => {
         const bookData = await collabraryContract.books(bookId);
-        const bookOwnerUsername = (await AuthContract.users(bookData.bookOwner)).username
+        const bookOwnerUsername = (await AuthContract.users(bookData.bookOwner)).username;
+        const bookLoanerUsername = (await AuthContract.users(bookData.bookLoaner)).username;
+        console.log(bookData)
         return {
             id: bookId,
             title: bookData.title,
@@ -19,6 +21,7 @@ const useBook = (bookId: number) => {
             genreId: bookData.genre.words[0],
             status: bookData.status.words[0],
             bookOwner: bookOwnerUsername,
+            bookLoaner: bookLoanerUsername
         } as Book
     }, [collabraryContract, bookId, AuthContract])
 

@@ -28,7 +28,7 @@ contract AuthContract {
         
         uint[] memory ownedBookIds = new uint[](100);
         uint[] memory loanedBookIds = new uint[](100);
-        User memory newUser = User(msg.sender, _username, _firstName, _lastName, _email, true, ownedBookIds, loanedBookIds);
+        User memory newUser = User(_username, _firstName, _lastName, _email, true, ownedBookIds, loanedBookIds);
         users[msg.sender] = newUser;
         emit newUserRegistered(msg.sender);
     }

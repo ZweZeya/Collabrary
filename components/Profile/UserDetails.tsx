@@ -56,7 +56,7 @@ const UserDetails = () => {
         setLoanedOutBooks(ownedBooks.filter(book => book.status == 1));
         setLoanRequestedBooks(ownedBooks.filter(book => book.status == 2));
         setReturnRequestedBooks(ownedBooks.filter(book => book.status == 3));
-    }, [ownedBooks])
+    }, [ownedBooks]);
 
     return (
         <div>
@@ -65,23 +65,23 @@ const UserDetails = () => {
                 <tbody>
                     <tr>
                         <th>Address</th>
-                        <td>{user[0]}</td>
+                        <td>{userAddress}</td>
                     </tr>
                     <tr>
                         <th>Username</th>
-                        <td>{user[1]}</td>
+                        <td>{user.username}</td>
                     </tr>
                     <tr>
                         <th>First Name</th>
-                        <td>{user[2]}</td>
+                        <td>{user.firstName}</td>
                     </tr>
                     <tr>
                         <th>Last Name</th>
-                        <td>{user[3]}</td>
+                        <td>{user.lastName}</td>
                     </tr>
                     <tr>
                         <th>Email</th>
-                        <td>{user[4]}</td>
+                        <td>{user.email}</td>
                     </tr>
                 </tbody>
             </table>

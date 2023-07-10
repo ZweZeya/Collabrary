@@ -25,34 +25,13 @@ contract CollabraryContract is AuthContract {
     event BookReturnApproved(Book indexed _book);
     event BookReturnRejected(Book indexed _book);
 
-    modifier onlyBookOwner(uint _bookId) {
-        Book memory _book = books[bookId];
-        require(msg.sender == _book.bookOwner, "You are not authorised to remove this book.");
-        _;
-    }
-
-    modifier nonBookOwner(uint _bookId) {
-        Book memory _bookToBeRemoved = books[bookId];
-        require(msg.sender != _bookToBeRemoved.bookOwner, "This book belongs to you.");
-        _;
-    }
-
-    modifier onlyBooksInInventory(uint _bookId) {
-        Book memory _book = books[bookId];
-        require(_book.status != BookStatus.Borrowed, "This book is on load.");
-        _;
-    }
-
-    modifier onlyBookBorrower(uint _bookId) {
-        Book memory _book = books[bookId];
-        require(msg.sender == _book.bookLoaner, "You are not authorised to return this book.");
-        _;
-    }
-
     modifier withinLoanLimit() {
         require(users[msg.sender].loanedBookIds.length < BOOK_LOAN_LIMIT, "You have exceeded book loan limit.");
         _;
     }
+
+    error bookStatusError();
+    error unAuthorised();
 
     function getBookCount() public view returns(uint) {
         return bookIds.length;
@@ -108,9 +87,17 @@ contract CollabraryContract is AuthContract {
         emit BookAdded(newBook);
     }
 
-    function removeBook(uint _bookId) public onlyBookOwner(_bookId) onlyBooksInInventory(_bookId) {
+    function removeBook(uint _bookId) public {
         
         Book memory _bookToBeRemoved = books[_bookId];
+
+        if (_bookToBeRemoved.bookOwner != msg.sender) {
+            revert unAuthorised();
+        }
+
+        if (_bookToBeRemoved.status != BookStatus.Available) {
+            revert bookStatusError();
+        }
 
         // Swap the last index with the index to be removed
         uint idIndex = _bookToBeRemoved.idIndex;
@@ -138,15 +125,32 @@ contract CollabraryContract is AuthContract {
         emit BookRemoved(_bookToBeRemoved);
     }
 
-    function requestBookLoan(uint _bookId) public nonBookOwner(_bookId) withinLoanLimit {
+    function requestBookLoan(uint _bookId) public withinLoanLimit {
         Book memory _bookToBeBorrowed = books[_bookId];
+
+        if (_bookToBeBorrowed.bookOwner == msg.sender) {
+            revert unAuthorised();
+        }
+
+        if (_bookToBeBorrowed.status != BookStatus.Available) {
+            revert bookStatusError();
+        }
+
         books[_bookId].status = BookStatus.LoanPending;
         books[_bookId].bookLoaner = msg.sender;
         emit BookLoanRequested(_bookToBeBorrowed);
     }
 
-    function approveBookLoan(uint _bookId) public onlyBookOwner(_bookId) {
+    function approveBookLoan(uint _bookId) public {
         Book memory _bookToBeBorrowed = books[_bookId];
+
+        if (_bookToBeBorrowed.bookOwner != msg.sender) {
+            revert unAuthorised();
+        }
+
+        if (_bookToBeBorrowed.status != BookStatus.LoanPending) {
+            revert bookStatusError();
+        }
 
         // Insert the book id into user array
         uint loanerIndex = users[_bookToBeBorrowed.bookLoaner].loanedBookIds.length;
@@ -157,20 +161,46 @@ contract CollabraryContract is AuthContract {
         emit BookLoanApproved(_bookToBeBorrowed);
     }
 
-    function rejectBookLoan(uint _bookId) public onlyBookOwner(_bookId) {
+    function rejectBookLoan(uint _bookId) public {
         Book memory _bookToBeBorrowed = books[_bookId];
+
+        if (_bookToBeBorrowed.bookOwner != msg.sender) {
+            revert unAuthorised();
+        }
+
+        if (_bookToBeBorrowed.status != BookStatus.LoanPending) {
+            revert bookStatusError();
+        }
+
         books[_bookId].status = BookStatus.Available;
         emit BookLoanRejected(_bookToBeBorrowed);
     }
 
-    function requestBookReturn(uint _bookId) public onlyBookBorrower(_bookId) {
+    function requestBookReturn(uint _bookId) public {
         Book memory _bookToBeReturned = books[_bookId];
+
+        if (_bookToBeReturned.bookLoaner != msg.sender) {
+            revert unAuthorised();
+        }
+
+        if (_bookToBeReturned.status != BookStatus.Borrowed) {
+            revert bookStatusError();
+        }
+
         books[_bookId].status = BookStatus.ReturnPending;
         emit BookReturnRequested(_bookToBeReturned);
     }
 
-    function approveBookReturn(uint _bookId) public onlyBookOwner(_bookId) {
+    function approveBookReturn(uint _bookId) public {
         Book memory _bookToBeReturned = books[_bookId];
+
+        if (_bookToBeReturned.bookOwner != msg.sender) {
+            revert unAuthorised();
+        }
+
+        if (_bookToBeReturned.status != BookStatus.ReturnPending) {
+            revert bookStatusError();
+        }
 
         // Swap the last index with the index to be removed
         address loaner = _bookToBeReturned.bookLoaner;
@@ -184,8 +214,17 @@ contract CollabraryContract is AuthContract {
         emit BookReturnApproved(_bookToBeReturned);
     }
 
-    function rejectBookReturn(uint _bookId) public onlyBookOwner(_bookId) {
+    function rejectBookReturn(uint _bookId) public {
         Book memory _bookToBeReturned = books[_bookId];
+
+        if (_bookToBeReturned.bookOwner != msg.sender) {
+            revert unAuthorised();
+        }
+
+        if (_bookToBeReturned.status != BookStatus.ReturnPending) {
+            revert bookStatusError();
+        }
+        
         books[_bookId].status = BookStatus.ReturnPending;
         emit BookReturnRejected(_bookToBeReturned);
     }

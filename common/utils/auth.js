@@ -31,7 +31,7 @@ const connectWallet = async () => {
 const loadContract = async () => {
     const contract = truffleContract(AuthContractJSON);
     contract.setProvider(window.web3.currentProvider);
-    const userAddress = (await window.ethereum.request({method: 'eth_accounts'}))[0];
+    const userAddress = window.web3.utils.toChecksumAddress((await window.ethereum.request({method: 'eth_accounts'}))[0]);
     const AuthContract =  await contract.deployed();
     const user = await loadUser(AuthContract, userAddress);
     return { AuthContract, userAddress, user };

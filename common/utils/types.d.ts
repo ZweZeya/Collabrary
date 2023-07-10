@@ -20,7 +20,8 @@ type Book = {
     author: string,
     genreId: number,
     status: BookStatus,
-    bookOwner: string
+    bookOwner: string,
+    bookLoaner: string,
 }
 
 export { User, UserData, Book };

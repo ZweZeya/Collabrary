@@ -31,6 +31,16 @@ const BookPage = () => {
         await collabraryContract.requestBookLoan(bookId, {from: userAddress});
     };
 
+    const handleApproveLoanClick = () => {
+        sendLoanApproval().then(r => {
+            setSuccessModalOpen(true);
+        })
+    };
+
+    const sendLoanApproval = async () => {
+        return await collabraryContract.approveBookLoan(bookId, {from: userAddress});
+    };
+
     return (
         <Layout>
             <PageHeader title="Book"></PageHeader>
@@ -38,11 +48,14 @@ const BookPage = () => {
             {book && book.bookOwner != user.username && book.status == BookStatus.Available &&
                 <Button onClick={handleBorrowClick}>Borrow</Button>
             }
+            {book && book.bookOwner == user.username && book.status == BookStatus.LoanPending &&
+                <Button onClick={handleApproveLoanClick}>Approve Loan</Button>
+            }
             <SimpleModal
                 isOpen={successModalOpen} 
                 setOpen={setSuccessModalOpen}
                 title="Success"
-                content="Loan request successfully sent."
+                content=""
                 icon={SimpleModalIcons.Success}
                 onRequestClose={() => router.push("/")}
             />
